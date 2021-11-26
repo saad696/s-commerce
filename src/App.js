@@ -3,7 +3,7 @@ import 'antd/dist/antd.css';
 import 'tachyons';
 import { useEffect, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router';
-import ProductList from './components/ProductList';
+import { ProductList } from './components';
 
 function App() {
     const [loggedinORloggedout, setloggedinORloggedout] = useState(false);
@@ -11,7 +11,7 @@ function App() {
 
     const renderLogin = () => {
         const isLoggedIn = localStorage.getItem('isLoggedIn');
-        console.log(isLoggedIn)
+        console.log(isLoggedIn);
         if (isLoggedIn === 'false') {
             navigate('/login');
         } else {
@@ -29,13 +29,17 @@ function App() {
                 <Route
                     path='/login'
                     element={
-                        <Login setloggedinORloggedout={setloggedinORloggedout} />
+                        <Login
+                            setloggedinORloggedout={setloggedinORloggedout}
+                        />
                     }
                 />
                 <Route
                     path='/'
                     element={
-                        <ProductList setloggedinORloggedout={setloggedinORloggedout} />
+                        <ProductList
+                            setloggedinORloggedout={setloggedinORloggedout}
+                        />
                     }
                 />
             </Routes>

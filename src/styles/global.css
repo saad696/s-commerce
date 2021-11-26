@@ -1,0 +1,13 @@
+.ant-drawer-title,
+.ant-drawer-header-title{
+    width: 100% !important;
+}
+
+.ant-page-header-heading-extra{
+    display: flex;
+    align-items: center;
+}
+
+.ant-carousel .slick-dots li button{
+    background: #4215cd !important;
+}
