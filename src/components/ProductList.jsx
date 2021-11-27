@@ -26,6 +26,7 @@ import {
     Filters,
     Slider,
     ProductSkeleton,
+    Footer
 } from './index';
 
 const ProductList = ({ setloggedinORloggedout }) => {
@@ -282,6 +283,7 @@ const ProductList = ({ setloggedinORloggedout }) => {
                     emptyCartFlag={emptyCartFlag}
                 />
             </Drawer>
+            <Footer />
         </div>
     );
 };

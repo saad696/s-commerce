@@ -1,10 +1,12 @@
 import { Switch, Typography, Select, Divider, Breadcrumb } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import useWindowDimensions from '../window-dimension-hook';
 
 const Filters = ({ setSearchBy, setSort, setProducts, setLoading }) => {
     const [categories, setCategories] = useState([]);
-    const [category, setCategory] = useState()
+    const [category, setCategory] = useState();
+    const { height, width } = useWindowDimensions();
 
     const { Text } = Typography;
     const { Option } = Select;
@@ -19,7 +21,7 @@ const Filters = ({ setSearchBy, setSort, setProducts, setLoading }) => {
     };
 
     const changeCategory = async (name) => {
-        setCategory(name)
+        setCategory(name);
         if (name === 'All') {
             setLoading(true);
             const { data } = await axios.get(
@@ -48,49 +50,50 @@ const Filters = ({ setSearchBy, setSort, setProducts, setLoading }) => {
 
     return (
         <>
-            <div className='flex justify-between items-center mt3 mh3'>
+            <div
+                className={`flex items-start justify-end mt1 ${
+                    width < 450 ? 'mr1' : 'mr4'
+                }`}
+            >
                 <div>
-                    <Breadcrumb separator=''>
-                        <Breadcrumb.Item className='fw6 gray'>
-                            Categories
-                        </Breadcrumb.Item>
-                        <Breadcrumb.Separator>:</Breadcrumb.Separator>
-                        {categories?.map((x) => (
-                            <span key='x'>
-                                <Breadcrumb.Item
-                                    className={category === x ? 'pointer fw6 link dim blue ' : 'pointer fw6 link dim gray'}
-                                    onClick={() => {
-                                        changeCategory(x);
-                                    }}
-                                >
-                                    {x}
-                                </Breadcrumb.Item>
-                            </span>
-                        ))}
-                    </Breadcrumb>
+                    <Text className={width < 450 && 'f7'}>Search by :</Text>{' '}
+                    <br />
+                    <Switch
+                        size={width < 450 ? 'small' : 'default'}
+                        checkedChildren='Products'
+                        unCheckedChildren='Categories'
+                        defaultChecked
+                        onChange={onSwicthChange}
+                    />
                 </div>
-                <span className='flex'>
-                    <div>
-                        <Text>Search by :</Text> <br />
-                        <Switch
-                            checkedChildren='Products'
-                            unCheckedChildren='Categories'
-                            defaultChecked
-                            onChange={onSwicthChange}
-                        />
-                    </div>
-                    <div className='ml3'>
-                        <Text>Sort :</Text> <br />
-                        <Select
-                            defaultValue='asc'
-                            style={{ width: 120 }}
-                            onChange={(value) => handleGridChange(value)}
-                        >
-                            <Option value='asc'>Ascending</Option>
-                            <Option value='desc'>Descending</Option>
-                        </Select>
-                    </div>
-                </span>
+                <div className='ml3'>
+                    <Text className={width < 450 && 'f7'}>Sort :</Text> <br />
+                    <Select
+                        size={width < 450 ? 'small' : 'default'}
+                        defaultValue='asc'
+                        style={width < 450 ? { width: 150 } : { width: 250 }}
+                        onChange={(value) => handleGridChange(value)}
+                    >
+                        <Option value='asc'>Ascending</Option>
+                        <Option value='desc'>Descending</Option>
+                    </Select>
+                </div>
+                <div className='ml3'>
+                    <Text className={width < 450 && 'f7'}>Category :</Text>{' '}
+                    <br />
+                    <Select
+                        size={width < 450 ? 'small' : 'default'}
+                        defaultValue='All'
+                        style={width < 450 ? { width: 150 } : { width: 250 }}
+                        onChange={(value) => changeCategory(value)}
+                    >
+                        {categories?.map((x) => (
+                            <Option key={x} value={x}>
+                                {x}
+                            </Option>
+                        ))}
+                    </Select>
+                </div>
             </div>
             <Divider className='mb0 mt2' />
         </>

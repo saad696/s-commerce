@@ -15,7 +15,7 @@ const ProductsSkeleton = () => {
                 {array.map((x) => (
                     <Col xs={12} md={8} lg={6} key={x}>
                         <Card>
-                            <Skeleton.Image active style={{ width: 225 }}/>
+                            <Skeleton.Image active/>
                             <Skeleton active />
                         </Card>
                     </Col>
