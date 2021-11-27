@@ -11,3 +11,9 @@
 .ant-carousel .slick-dots li button{
     background: #4215cd !important;
 }
+
+.ant-skeleton .ant-skeleton-element{
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+}

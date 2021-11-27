@@ -7,6 +7,7 @@ import { ProductList } from './components';
 
 function App() {
     const [loggedinORloggedout, setloggedinORloggedout] = useState(false);
+    const [reRedner, setReRender] = useState()
     let navigate = useNavigate();
 
     const renderLogin = () => {
@@ -21,10 +22,11 @@ function App() {
 
     useEffect(() => {
         renderLogin();
+        setReRender(Math.random())
     }, [loggedinORloggedout]);
 
     return (
-        <>
+        <div key={reRedner}>
             <Routes>
                 <Route
                     path='/login'
@@ -43,7 +45,7 @@ function App() {
                     }
                 />
             </Routes>
-        </>
+        </div>
     );
 }
 
